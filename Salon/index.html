@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salon Booking Widget</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+  <div id="booking-widget" class="container">
+    <!-- Salon Header -->
+    <div class="salon-header">
+      <div class="salon-info">
+        <div class="salon-text">
+          <!-- Avatar Row -->
+          <div class="salon-avatar-title">
+            <div class="salon-avatar">N</div>
+            <div class="salon-title-rating">
+              <!-- <h1>Natural Beauty Salon, Spa and Wellness Center</h1> -->
+              <h1 class="salon-name">Natural Beauty Salon, Spa and Wellness Center</h1>
+
+              <span class="rating">★ 4.8</span>
+            </div>
+          </div>
+
+          <!-- Location Row -->
+          <div class="salon-location-row">
+            <p>
+              <i class="fa fa-map-marker-alt"></i> 319, Bin Sougat centre,
+              Rashidiya branch, UAE.
+            </p>
+            <a href="#" class="view-map"><i class="fa fa-map"></i> View Map</a>
+          </div>
+
+          <!-- Additional Info -->
+          <p><i class="fa fa-clock"></i> 9:00 AM to 9:00 PM</p>
+          <p><i class="fa fa-bolt"></i> Instant Booking</p>
+        </div>
+      </div>
+
+      <div class="salon-image">
+        <img src="https://t4.ftcdn.net/jpg/04/33/36/05/360_F_433360513_EyYtlNaz3fCJU5UHaPhURBodPCwNIMVN.jpg"
+          alt="Salon Image" />
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs">
+      <button class="active" onclick="showTab('services')">Services</button>
+      <button onclick="showTab('gift-vouchers')">Gift Vouchers</button>
+      <button onclick="showTab('select-staff')">Select Staff</button>
+    </div>
+
+    <div class="content">
+      <!-- Categories -->
+      <div class="categories">
+        <ul id="category-list"></ul>
+      </div>
+      <div id="services-container" class="services-container"></div>
+      <div class="service-list" id="service-list"></div>
+
+      <!-- Staff Selection -->
+      <div class="staff-selection hidden" id="staff-selection">
+        <h3>Select Staff</h3>
+        <div class="staff-options">
+          <label><input type="radio" name="staff" value="No preference" checked /><span>No preference</span></label>
+          <label><input type="radio" name="staff" value="Ryan" /><span>Ryan</span></label>
+          <label><input type="radio" name="staff" value="John" /><span>John</span></label>
+          <label><input type="radio" name="staff" value="Amaya" /><span>Amaya</span></label>
+          <label><input type="radio" name="staff" value="Sam" /><span>Sam</span></label>
+          <label><input type="radio" name="staff" value="Anna" /><span>Anna</span></label>
+        </div>
+
+        <!-- Date Picker -->
+        <div class="date-picker-section">
+          <div class="date-picker-title">Select Date</div>
+          <div class="date-scroll-wrapper">
+            <button class="arrow" onclick="scrollDates(-1)">&lt;</button>
+            <div id="date-scroll" class="date-scroll"></div>
+            <button class="arrow" onclick="scrollDates(1)">&gt;</button>
+          </div>
+        </div>
+
+        <!-- Time Slot Section -->
+        <div class="time-slot-section">
+          <div class="time-group">
+            <h4>Early hours</h4>
+            <div class="time-grid">
+              <div class="time-slot">9:00 AM</div>
+              <div class="time-slot">9:15 AM</div>
+              <div class="time-slot">9:30 AM</div>
+              <div class="time-slot">9:45 AM</div>
+              <div class="time-slot">10:00 AM</div>
+              <div class="time-slot">10:15 AM</div>
+              <div class="time-slot">10:30 AM</div>
+              <div class="time-slot">10:45 AM</div>
+              <div class="time-slot">11:00 AM</div>
+              <div class="time-slot">11:15 AM</div>
+              <div class="time-slot">11:30 AM</div>
+              <div class="time-slot">12:00 PM</div>
+            </div>
+          </div>
+
+          <div class="time-group">
+            <h4>Late hours</h4>
+            <div class="time-grid">
+              <div class="time-slot">4:00 PM</div>
+              <div class="time-slot">4:15 PM</div>
+              <div class="time-slot">4:30 PM</div>
+              <div class="time-slot">4:45 PM</div>
+              <div class="time-slot">5:00 PM</div>
+              <div class="time-slot">5:15 PM</div>
+              <div class="time-slot">5:30 PM</div>
+              <div class="time-slot">5:45 PM</div>
+              <div class="time-slot">6:00 PM</div>
+              <div class="time-slot">6:15 PM</div>
+              <div class="time-slot">6:30 PM</div>
+              <div class="time-slot">6:45 PM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cart Section -->
+      <div class="cart">
+        <div class="cart-details-desktop">
+          <h3 class="cart-title">
+            Cart <span id="item-count" class="item-count">0 Items</span>
+          </h3>
+          <div id="cart-items" class="cart-items"></div>
+          <div class="cart-empty" id="cart-empty">
+            <h4 class="empty-heading">Your Cart is Empty</h4>
+            <div class="cart-empty-box">
+              <img src="https://cdn-icons-png.flaticon.com/512/10437/10437638.png" alt="Empty box icon" />
+              <p>
+                Good looks always gives you the confidence!<br />Go ahead,
+                Select some services.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="cart-line">
+          <span id="cart-date"></span><br />
+          <span id="cart-time"></span>
+        </p>
+
+        <div class="cart-summary" id="cart-summary" style="display: none">
+          <div class="summary-line total">
+            <span class="label">Total</span>
+            <span class="value">$<span id="total-price">0</span></span>
+          </div>
+        </div>
+
+        <button id="book-now-desktop" class="book-now-button" style="display: none">
+          Book Now
+        </button>
+
+        <div id="mobile-cart-summary">
+          <span id="mobileSummaryText">0 Items | $0.00</span>
+          <button id="book-now" class="book-now-button" style="display: none">
+            Book Now
+          </button>
+        </div>
+
+        <div id="service-alert" class="mini-popup hidden">
+          Please select at least 1 service.
+        </div>
+        <div id="datetime-alert" class="mini-popup hidden">
+          <p>Please select both a date and time slot.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Booking Summary Modal -->
+  <div class="mobile-booking-summary-modal hidden">
+    <div class="summary-modal-content">
+      <!-- <button class="back-summary-modal" aria-label="Go back">←</button> -->
+      <button class="back-summary-modal" aria-label="Go back">←</button>
+      <span class="brand-name">Natural Beauty Salon</span>
+
+      <h2 class="summary-title">Booking summary</h2>
+
+      <div class="summary-services-list" id="summary-services-list"></div>
+
+      <div class="add-service-btn">
+        <button id="add-service-link">Add service</button>
+      </div>
+
+      <div class="summary-row editable">
+        <span>Date: <strong id="summary-date"></strong></span>
+
+        <button class="edit-icon" aria-label="Edit date">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16" height="16" viewBox="0 0 24 24">
+            <path
+              d="M3 17.25V21h3.75l11-11.03-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="summary-row editable">
+        <span>Time: <strong id="summary-time"></strong></span>
+
+        <button class="edit-icon" aria-label="Edit time">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16" height="16" viewBox="0 0 24 24">
+            <path
+              d="M3 17.25V21h3.75l11-11.03-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="summary-total">
+        <p><strong>Total:</strong> $<span id="summary-total">0</span></p>
+      </div>
+
+      <div class="summary-actions">
+        <button id="proceed-to-form" class="book-now-button">Book now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Details Modal -->
+  <div class="booking-details-overlay hidden">
+    <div class="booking-details-panel">
+      <button class="close-btn">&times;</button>
+      <h2>Enter your details</h2>
+      <p class="subheading">Enter your details to book an appointment</p>
+
+      <form class="booking-form">
+        <label>First name <span class="required">*</span>
+          <input type="text" id="first-name" placeholder="First name" autocomplete="given-name" />
+        </label>
+        <label>Last name
+          <input type="text" id="last-name" placeholder="Last name" />
+        </label>
+        <label>Email address
+          <input type="email" id="email" placeholder="Email" autocomplete="email" />
+        </label>
+        <label>Date of birth
+          <div class="dob-wrapper">
+            <input type="date" id="dob-input" min="1900-01-01" max="2025-04-06" />
+          </div>
+        </label>
+        <label>Mobile number <span class="required">*</span>
+          <input type="tel" id="mob" placeholder="e.g. 0501234567" minlength="10" maxlength="10" pattern="\d{10}" />
+          <small>Please avoid ‘0’ before the number. Example: 502581098</small>
+
+        </label>
+        <label>Booking notes
+          <textarea type="text" id="notes" placeholder="Additional info..."></textarea>
+        </label>
+
+        <div class="payment-options">
+          <p>Choose payment<span class="required">*</span></p>
+          <label class="radio-option">
+            <input type="radio" id="payment-min" name="payment" checked />
+            <span class="label-text">Minimum</span>
+            <span class="price">$30</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" id="payment-full" name="payment" checked />
+            <span>Full Amount </span>
+            <span id="full-amount">$310</span>
+          </label>
+        </div>
+
+        <label class="terms">
+          <input type="checkbox" id="terms" required />
+          <span>I agree to the <a href="#">Terms & Conditions</a></span>
+          <span class="required">*</span>
+        </label>
+
+        <div id="form-alert" class="custom-alert">
+          Please fill all the required fields.
+        </div>
+
+        <button id="confirm-booking" class="confirm-booking">
+          Confirm Booking!
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Booking Success Overlay -->
+  <div id="booking-success-overlay" class="booking-success-overlay hidden">
+    <div class="booking-success-content">
+      <button class="close-success-overlay">&times;</button>
+      <div class="checkmark-circle">✔</div>
+      <h3>Payment Success.</h3>
+      <h2>Booking completed.</h2>
+      <p>Booking Details</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
